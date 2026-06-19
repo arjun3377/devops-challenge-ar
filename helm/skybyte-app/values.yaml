@@ -2,7 +2,7 @@ replicaCount: 1
 
 image:
   repository: skybyte/app
-  tag: latest
+  tag: latest-slim
   pullPolicy: IfNotPresent
 
 service:
