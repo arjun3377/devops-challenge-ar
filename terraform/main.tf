@@ -17,18 +17,25 @@ resource "kubernetes_resource_quota" "memory" {
   }
 }
 
-resource "kubernetes_secret" "api_token" {
-  metadata {
-    name      = "api-token"
-    namespace = kubernetes_namespace.this.metadata[0].name
-  }
 
-  data = {
-    token = var.api_token
-  }
+resource "helm_release" "prometheus" {
+  # depends_on = [ kubernetes_manifest.skybytech-require-non-root, kubernetes_manifest.skybytech-require-resources ]
+  name             = "prome"
+  repository       = "https://prometheus-community.github.io/helm-charts"
+  chart            = "kube-prometheus-stack"
 
-  type = "Opaque"
+  namespace        = "monitoring"
+  create_namespace = true
 }
+
+# resource "helm_release" "kyverno" {
+#   name             = "kyverno-helm"
+#   repository       = "https://kyverno.github.io/kyverno/"
+#   chart            = "kyverno"
+
+#   namespace        = "kyverno-ns"
+#   create_namespace = true
+# }
 
 resource "kubernetes_manifest" "skybytech-require-non-root" {
   manifest = yamldecode(file("../policies/require-non-root.yaml"))
@@ -36,4 +43,11 @@ resource "kubernetes_manifest" "skybytech-require-non-root" {
 
 resource "kubernetes_manifest" "skybytech-require-resources" {
   manifest = yamldecode(file("../policies/require-resources.yaml"))
+}
+
+resource "helm_release" "skybytech" {
+  depends_on = [ helm_release.prometheus, kubernetes_namespace.this ]
+  name             = "skybytech"
+  chart            = "../helm/skybyte-app"
+
 }
