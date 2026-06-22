@@ -1,15 +1,10 @@
 #!/usr/bin/env bash
-# setup.sh — local deployment helper
-#
-# Builds the image, applies Terraform, installs/upgrades the Helm release.
+Builds the image, applies Terraform, installs/upgrades the Helm release.
 
-echo "==> Building Docker image"
-#docker build -t skybyte/app:latest .
+# echo "==> Building Docker image"    ## its local Env. avoid unnecessary size
+#docker build -t skybyte/app:v1-slim . 
+#minikube image build -t skybyte/app:v1-slim .
 
-# cd terraform
-# terraform destroy -auto-approve
-# cd ..
-# helm uninstall kyverno-helm -n kyverno-ns
 
 if helm list -n kyverno-ns | grep -q kyverno-helm; then
   echo "✅ Helm release kyverno-helm already exists in namespace kyverno-ns . Skipping install."
