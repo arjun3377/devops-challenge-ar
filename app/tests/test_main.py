@@ -1,5 +1,5 @@
 """Minimal tests for the greeting service."""
-from main import app
+from app.main import app
 
 
 def test_hello():
