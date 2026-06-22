@@ -17,6 +17,11 @@ spec:
         app.kubernetes.io/name: {{ include "skybyte-app.name" . }}
         app.kubernetes.io/instance: {{ .Release.Name }}
     spec:
+      securityContext:
+        runAsNonRoot: true
+        seccompProfile:
+          type: RuntimeDefault
+
       terminationGracePeriodSeconds: 60
       containers:
         - name: app
@@ -27,12 +32,9 @@ spec:
               exec:
                command: ["sh", "-c", "sleep 10"]
           securityContext:
-            runAsNonRoot: true
             runAsUser: 10001
             readOnlyRootFilesystem: true
             allowPrivilegeEscalation: false
-            seccompProfile:
-              type: RuntimeDefault
             capabilities:
               drop:
                 - ALL

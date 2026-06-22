@@ -29,3 +29,11 @@ resource "kubernetes_secret" "api_token" {
 
   type = "Opaque"
 }
+
+resource "kubernetes_manifest" "skybytech-require-non-root" {
+  manifest = yamldecode(file("../policies/require-non-root.yaml"))
+}
+
+resource "kubernetes_manifest" "skybytech-require-resources" {
+  manifest = yamldecode(file("../policies/require-resources.yaml"))
+}
