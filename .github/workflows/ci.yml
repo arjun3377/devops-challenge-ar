@@ -26,39 +26,39 @@ jobs:
       - name: Lint Python
         run: flake8 app/ --exclude=app/* --exit-zero
 
-  # helm:
-  #   name: Helm + Kubernetes Validation
-  #   runs-on: ubuntu-latest
+  helm:
+    name: Helm + Kubernetes Validation
+    runs-on: ubuntu-latest
 
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v4
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-  #     - name: Install Helm
-  #       uses: azure/setup-helm@v4
+      - name: Install Helm
+        uses: azure/setup-helm@v4
 
-  #     - name: Install kubeconform
-  #       run: |
-  #         curl -L -o kubeconform.tar.gz \
-  #           https://github.com/yannh/kubeconform/releases/latest/download/kubeconform-linux-amd64.tar.gz
-  #         tar -xzf kubeconform.tar.gz
-  #         sudo mv kubeconform /usr/local/bin/
+      - name: Install kubeconform
+        run: |
+          curl -L -o kubeconform.tar.gz \
+            https://github.com/yannh/kubeconform/releases/latest/download/kubeconform-linux-amd64.tar.gz
+          tar -xzf kubeconform.tar.gz
+          sudo mv kubeconform /usr/local/bin/
 
-  #     - name: Helm lint
-  #       run: |
-  #         helm lint helm/
+      - name: Helm lint
+        run: |
+          helm lint helm/
 
-  #     - name: Render manifests
-  #       run: |
-  #         mkdir -p rendered
-  #         helm template app helm/ > rendered/manifests.yaml
+      - name: Render manifests
+        run: |
+          mkdir -p rendered
+          helm template app helm/ > rendered/manifests.yaml
 
-  #     - name: Validate rendered manifests
-  #       run: |
-  #         kubeconform \
-  #           -strict \
-  #           -summary \
-  #           rendered/manifests.yaml
+      - name: Validate rendered manifests
+        run: |
+          kubeconform \
+            -strict \
+            -summary \
+            rendered/manifests.yaml
 
   # terraform:
   #   name: Terraform Validation
