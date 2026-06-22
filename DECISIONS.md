@@ -55,3 +55,11 @@
 **Rationale:** The application is a small Flask service with a simple codebase. Flake8 provides the required linting capabilities with minimal configuration and is a well-established standard in many Python projects.
 **Cost / risk you accepted:** Flake8 executes more slowly than Ruff
 
+
+
+**Proof of Policy as code Implementation**
+
+![alt text](image.png)
+
+
+![alt text](<Screenshot 2026-06-23 at 3.44.48 AM.png>)
