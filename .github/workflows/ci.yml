@@ -135,7 +135,7 @@ jobs:
             --platform linux/amd64,linux/arm64 \
             --tag ${{ env.IMAGE_NAME }}:multiarch \
             --output type=cacheonly \
-  #           .        
+            .        
 
   # kyverno:
   #   name: Kyverno Policy Validation
