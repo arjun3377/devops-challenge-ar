@@ -77,7 +77,10 @@ jobs:
         uses: hashicorp/setup-terraform@v3
 
       - name: Terraform Init
-        run: terraform init -backend=false
+        run: |
+         ls -lrt 
+         pwd
+         terraform init -backend=false
 
       - name: Terraform Format Check
         run: terraform fmt -check -recursive
