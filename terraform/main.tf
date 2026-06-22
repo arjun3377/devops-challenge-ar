@@ -20,9 +20,9 @@ resource "kubernetes_resource_quota" "memory" {
 
 resource "helm_release" "prometheus" {
   # depends_on = [ kubernetes_manifest.skybytech-require-non-root, kubernetes_manifest.skybytech-require-resources ]
-  name             = "prome"
-  repository       = "https://prometheus-community.github.io/helm-charts"
-  chart            = "kube-prometheus-stack"
+  name       = "prome"
+  repository = "https://prometheus-community.github.io/helm-charts"
+  chart      = "kube-prometheus-stack"
 
   namespace        = "monitoring"
   create_namespace = true
@@ -46,8 +46,8 @@ resource "kubernetes_manifest" "skybytech-require-resources" {
 }
 
 resource "helm_release" "skybytech" {
-  depends_on = [ helm_release.prometheus, kubernetes_namespace.this ]
-  name             = "skybytech"
-  chart            = "../helm/skybyte-app"
+  depends_on = [helm_release.prometheus, kubernetes_namespace.this]
+  name       = "skybytech"
+  chart      = "../helm/skybyte-app"
 
 }
