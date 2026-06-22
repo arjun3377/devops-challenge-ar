@@ -88,49 +88,49 @@ jobs:
       - name: Terraform Validate
         run: terraform validate
 
-  # security:
-  #   name: Build + Trivy Scan
-  #   runs-on: ubuntu-latest
+  security:
+    name: Build + Trivy Scan
+    runs-on: ubuntu-latest
 
-  #   steps:
-  #     - name: Checkout
-  #       uses: actions/checkout@v4
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-  #     - name: Setup QEMU
-  #       uses: docker/setup-qemu-action@v3
+      - name: Setup QEMU
+        uses: docker/setup-qemu-action@v3
 
-  #     - name: Setup Buildx
-  #       uses: docker/setup-buildx-action@v3
+      - name: Setup Buildx
+        uses: docker/setup-buildx-action@v3
 
-  #     - name: Build Docker image
-  #       uses: docker/build-push-action@v6
-  #       with:
-  #         context: .
-  #         load: true
-  #         tags: ${{ env.IMAGE_NAME }}:ci
-  #         platforms: linux/amd64
+      - name: Build Docker image
+        uses: docker/build-push-action@v6
+        with:
+          context: .
+          load: true
+          tags: ${{ env.IMAGE_NAME }}:ci
+          platforms: linux/amd64
 
-  #     - name: Install Trivy
-  #       uses: aquasecurity/trivy-action@0.28.0
-  #       with:
-  #         scan-type: fs
-  #         scan-ref: .
-  #         severity: HIGH,CRITICAL
-  #         exit-code: "1"
+      - name: Install Trivy
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          scan-type: fs
+          scan-ref: .
+          severity: HIGH,CRITICAL
+          exit-code: "1"
 
-  #     - name: Trivy image scan
-  #       uses: aquasecurity/trivy-action@0.28.0
-  #       with:
-  #         image-ref: ${{ env.IMAGE_NAME }}:ci
-  #         severity: HIGH,CRITICAL
-  #         exit-code: "1"
+      - name: Trivy image scan
+        uses: aquasecurity/trivy-action@0.28.0
+        with:
+          image-ref: ${{ env.IMAGE_NAME }}:ci
+          severity: HIGH,CRITICAL
+          exit-code: "1"
 
-  #     - name: Verify multi-arch build
-  #       run: |
-  #         docker buildx build \
-  #           --platform linux/amd64,linux/arm64 \
-  #           --tag ${{ env.IMAGE_NAME }}:multiarch \
-  #           --output type=cacheonly \
+      - name: Verify multi-arch build
+        run: |
+          docker buildx build \
+            --platform linux/amd64,linux/arm64 \
+            --tag ${{ env.IMAGE_NAME }}:multiarch \
+            --output type=cacheonly \
   #           .        
 
   # kyverno:
