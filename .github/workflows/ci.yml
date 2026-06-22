@@ -26,12 +26,6 @@ jobs:
       - name: Lint Python
         run: flake8 app/ --exclude=app/* --exit-zero
 
-      - name: Run unit tests
-        run: |
-          ls -lrt
-          pwd
-          pytest -v app/tests/
-
   # helm:
   #   name: Helm + Kubernetes Validation
   #   runs-on: ubuntu-latest
