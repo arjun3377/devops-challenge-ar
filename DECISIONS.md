@@ -22,7 +22,7 @@
 
 **Cost / risk you accepted:** its suitable for local env setup. 
 
-### Decision: <ServiceMonitor Over the Prometheus scrape annotations>
+# **### Decision: ServiceMonitor Over the Prometheus scrape annotations**
 
 **Context:** The application must expose Prometheus metrics (http_requests_total and http_request_duration_seconds) and provide a mechanism for Prometheus to discover and scrape the /metrics endpoint in a Kubernetes environment.
 
@@ -35,7 +35,7 @@
 **Cost / risk you accepted:** what you knowingly didn't optimise for
 
 
-### Decision: <Policy as Code - Kyverno or Gatekeeper>
+# **### Decision: Policy as Code - Kyverno or Gatekeeper**
 
 **Context:** preventive controls that automatically detect and block configuration mistakes before they reach the cluster.
 
@@ -47,7 +47,7 @@
 
 **Cost / risk you accepted:** Kyverno provides less flexibility than custom OPA/Rego policies for highly complex policy logic.
 
-### Decision: <Choose terraform way to deploy Kyverno policy resources>
+# **### Decision: Choose terraform way to deploy Kyverno policy resources**
 
 **Context:** The project requires Kubernetes admission policies to prevent security and reliability regressions from being deployed
 
@@ -59,7 +59,7 @@
 
 **Cost / risk you accepted:** Terraform state now includes policy resources, increasing the scope of infrastructure management
 
-### Decision: <install Kyverno helm chart via Bash>
+# **### Decision: install Kyverno helm chart via Bash**
 
 **Context:** A policy engine must be installed in the cluster before applying the required validation policies
 
@@ -71,7 +71,7 @@
 
 **Cost / risk you accepted:** NA
 
-### Decision: <Create destroy.sh -/ opposite of setup.sh >
+# **### Decision: Create destroy.sh -/ opposite of setup.sh**
 
 **Context:** The setup process installs cluster dependencies and provisions Kubernetes resources. Reviewers need a repeatable way to remove all resources created during setup and return the cluster to its original state.
 
@@ -83,7 +83,7 @@
 
 **Cost / risk you accepted:** reduce time cost.
 
-### Decision: <choose flask8 over Ruff>
+# **### Decision: choose flask8 over Ruff**
 
 **Context:** The project requires automated Python linting in CI to catch code quality issues before deployment.
 
