@@ -28,7 +28,7 @@ jobs:
 
       - name: Run unit tests
         run: |
-          pytest -v tests/
+          pytest -v tests/*
 
   # helm:
   #   name: Helm + Kubernetes Validation
