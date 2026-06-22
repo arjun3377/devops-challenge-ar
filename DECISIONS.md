@@ -1,8 +1,13 @@
 ### Decision: <secret implemented via K8s>
+
 **Context:** It help to expose Crendential/Token in Plan git repo.
+
 **Options considered:** K8s secret, Via Terraform, External services(Azure key valut, Hashicorp Vault... etc)
+
 **Chosen:** K8s secret
+
 **Rationale:** As this assisgment level its good. but for production level always setup External services for better security. 
+
 **Cost / risk you accepted:** Risk K8s Secret Basic level Encrption with Base64
 
 ### Decision: <Image build direct into minikube>
