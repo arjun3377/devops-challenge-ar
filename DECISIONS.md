@@ -1,4 +1,4 @@
-### Decision: <secret implemented via K8s>
+**### Decision: secret implemented via K8s**
 
 **Context:** It help to expose Crendential/Token in Plan git repo.
 
