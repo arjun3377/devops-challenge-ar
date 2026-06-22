@@ -1,0 +1,22 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: skybytech-app
+  namespace: monitoring
+  labels:
+        release: prome
+spec:
+  selector:
+    matchLabels:
+        app.kubernetes.io/name: skybyte-app
+        app.kubernetes.io/instance: skybytech
+        app.kubernetes.io/managed-by: Helm
+
+  namespaceSelector:
+    matchNames:
+      - devops-challenge
+
+  endpoints:
+  - port: http
+    path: /metrics
+    interval: 15s
