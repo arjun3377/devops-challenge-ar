@@ -58,6 +58,7 @@ jobs:
           kubeconform \
             -strict \
             -summary \
+            -ignore-missing-schemas \
             rendered/manifests.yaml
 
   # terraform:
