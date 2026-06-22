@@ -5,8 +5,8 @@ echo -e "\nPrints the in-container UID (proving non-root)\n"
 kubectl exec -it `kubectl get pod -A | grep skybytech | awk '{print $2}'` -n devops-challenge -- id
 
 echo -e " \nPrints the bound port and capabilities.\n"
-helm get all skybytech | grep -A 2 capabilities
-helm get all skybytech | grep -C 2 containerPort
+helm get all skybytech -n devops-challenge | grep -A 2 capabilities
+helm get all skybytech -n devops-challenge | grep -C 2 containerPort
 
 echo -e "\nCurls / and validates the response body\n"
 kubectl port-forward service/`kubectl get service -A | grep skybytech | awk '{print $2}'` -n devops-challenge 8080:80 >/tmp/pf.log 2>&1 &

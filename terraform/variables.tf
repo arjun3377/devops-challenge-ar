@@ -10,9 +10,3 @@ variable "memory_quota" {
   default     = "512Mi"
 }
 
-variable "api_token" {
-  type        = string
-  description = "API token consumed by the app"
-  default     = "sk-skybyte-prod-7f3c9a2b1e8d4a6c"
-  sensitive   = true
-}

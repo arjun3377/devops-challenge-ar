@@ -50,4 +50,6 @@ resource "helm_release" "skybytech" {
   name       = "skybytech"
   chart      = "../helm/skybyte-app"
 
+  namespace        = "devops-challenge"
+  create_namespace = true
 }

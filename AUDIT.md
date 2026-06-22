@@ -1,10 +1,11 @@
 Role: DevOps Engineer
 Time: 48 hours from when you start the clock (tell us when you start; we trust you) 
-Starting Time: 01:00 PM - 19 June 2026
+Starting Time: 01:00 PM - 19 June 2026 & Sunday break
+Submitting On : 22 June 2026 12:00 PM
 
 **#Security Issues**
 
-1. Secret exposed via Helm values
+**1. Secret exposed via Helm values**
 
 File: templates/deployment.yaml
 
@@ -29,7 +30,7 @@ Fix :
                   key: token
 
 
-2. Missing container securityContext
+**2. Missing container securityContext**
 
 File: templates/deployment.yaml
 
@@ -51,7 +52,7 @@ Fix:
               drop:
                 - ALL
 
-3. Image tag is mutable
+**3. Image tag is mutable**
 
 File: templates/deployment.yaml
 
@@ -76,7 +77,7 @@ image: "skybyte/app:v1.1.0-build1" - A Semantic Version coupled with a build num
 
 **Reliability Issues**
 
-1) No resource requests or limits
+**1) No resource requests or limits**
 
 File: templates/deployment.yaml
 
@@ -98,7 +99,7 @@ Fix:
               cpu: 400m
               memory: 400Mi
 
-2) Liveness and readiness probes are incomplete
+**2) Liveness and readiness probes are incomplete**
 
 File: templates/deployment.yaml
 
@@ -140,7 +141,7 @@ readinessProbe:
   periodSeconds: 5
 
 
-3. Missing startupProbe
+**3. Missing startupProbe**
 
 File: templates/deployment.yaml
 
@@ -159,7 +160,7 @@ startupProbe:
     port: http
 
 
-4) No graceful shutdown handling
+**4) No graceful shutdown handling**
 
 File: templates/deployment.yaml
 
@@ -183,7 +184,7 @@ lifecycle:
         - sleep 10
 
 
-5) No PodDisruptionBudget
+**5) No PodDisruptionBudget**
 
 File: Missing resource
 
@@ -207,7 +208,7 @@ spec:
     matchLabels:
       app.kubernetes.io/name: skybyte-app
 
-10. Single replica risk
+**10. Single replica risk**
 
 File: deployment.yaml
 
@@ -223,7 +224,7 @@ Fix:
 
 **Hygiene Issues**
 
-1) Namespace hardcoded in manifests
+**1) Namespace hardcoded in manifests**
 
 File: Deployment and Service manifests
 
@@ -238,7 +239,7 @@ Fix:
     namespace: {{ .Release.Namespace }}
 
 
-2) No imagePullSecrets support
+**2) No imagePullSecrets support**
 
 File: templates/deployment.yaml
 
@@ -253,7 +254,7 @@ Fix:
       - name: pull-secret
 
 
-3) No deployment strategy configuration
+**3) No deployment strategy configuration**
 
 File: templates/deployment.yaml
 
